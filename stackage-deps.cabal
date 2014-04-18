@@ -1,0 +1,360 @@
+name:                stackage-deps
+version:             2014.4.18.0
+homepage:            https://github.com/jwiegley/stackage-deps
+license:             BSD3
+license-file:        LICENSE
+author:              libraries@haskell.org
+maintainer:          haskell-platform@projects.haskell.org
+category:            System
+synopsis:            A set of Stackage's dependencies
+description:
+    This package provides a simple Cabal file which lists all of Stackage's
+    dependencies, so that you may install Stackage into your package database
+    by simply running:
+
+    .
+    @cabal install -j --only-dependencies@
+
+cabal-version:       >= 1.8
+build-type:          Custom
+tested-with:         GHC ==7.6.3
+
+flag include-ghc-depends
+  description: Include all the GHC provided packages in the dependencies
+  default:     False
+
+library
+  if flag(include-ghc-depends)
+    build-depends:
+      ghc                      ==7.6.3,
+
+      -- Core libraries: provided by every ghc installation
+      -- We don't include "non-API" packages here.
+      --                                        begin core packages
+      array                     ==0.4.0.1,
+      base                      ==4.6.0.1,
+      bytestring                ==0.10.0.2,
+      Cabal                     ==1.16.0,
+      containers                ==0.5.0.0,
+      deepseq                   ==1.3.0.1,
+      directory                 ==1.2.0.1,
+      filepath                  ==1.3.0.1,
+      haskell2010               ==1.1.1.0,
+      haskell98                 ==2.0.0.2,
+      hpc                       ==0.6.0.0,
+      old-locale                ==1.0.0.5,
+      old-time                  ==1.1.0.1,
+      pretty                    ==1.1.1.0,
+      process                   ==1.1.0.2,
+      template-haskell          ==2.8.0.0,
+      time                      ==1.4.0.1
+  if !os(windows)
+    build-depends:
+      unix                      ==2.6.0.1
+      --                                        end core packages
+  else
+    build-depends:
+      Win32                     ==2.3.0.0
+
+  build-depends:
+    -- Libraries in addition to what GHC provides:
+    -- Note: newer versions of cgi need monad-catchio.
+    --                                          begin platform packages
+    async                       ==2.0.1.4,
+    attoparsec                  ==0.10.4.0,
+    case-insensitive            ==1.0.0.1,
+    cgi                         ==3001.1.7.5,
+    fgl                         ==5.4.2.4,
+    GLUT                        ==2.4.0.0,
+    GLURaw                      ==1.3.0.0,
+    haskell-src                 ==1.0.1.5,
+    hashable                    ==1.1.2.5,
+    html                        ==1.0.1.2,
+    HTTP                        ==4000.2.8,
+    HUnit                       ==1.2.5.2,
+    mtl                         ==2.1.2,
+    network                     ==2.4.1.2,
+    OpenGL                      ==2.8.0.0,
+    OpenGLRaw                   ==1.3.0.0,
+    parallel                    ==3.2.0.3,
+    parsec                      ==3.1.3,
+    QuickCheck                  ==2.6,
+    random                      ==1.0.1.1,
+    regex-base                  ==0.93.2,
+    regex-compat                ==0.95.1,
+    regex-posix                 ==0.95.2,
+    split                       ==0.2.2,
+    stm                         ==2.4.2,
+    syb                         ==0.4.0,
+    text                        ==0.11.3.1,
+    transformers                ==0.3.0.0,
+    unordered-containers        ==0.2.3.0,
+    vector                      ==0.10.0.1,
+    xhtml                       ==3000.2.1,
+    zlib                        ==0.5.4.1,
+
+    -- Libraries that are needed to support the above,
+    -- though are not officially part of the platform
+    primitive                   ==0.5.0.1
+
+    ------------------------------------------------------------------------
+    --                             Stackage                               --
+    ------------------------------------------------------------------------
+    , accelerate          <0.14
+    , active
+    , ad
+    , adjunctions
+    , async
+    , aws
+    , base-compat
+    , base-unicode-symbols
+    , base16-bytestring
+    , basic-prelude
+    , bifunctors
+    , bindings-DSL
+    , blaze-html
+    , blaze-markup
+    , BlogLiterately
+    , BlogLiterately-diagrams
+    , bound
+    -- , bson             ==0.2.4
+    , bytedump
+    , byteorder
+    -- , bzlib-conduit
+    , cairo
+    , case-insensitive
+    , cassava
+    , categories
+    , certificate
+    , charset
+    , cipher-aes
+    , cipher-rc4
+    , classy-prelude-yesod
+    , comonad
+    , comonad-extras
+    , comonad-transformers
+    , comonads-fd
+    , compdata
+    , composition
+    , compressed
+    , concurrent-supply
+    , conduit-combinators
+    , configurator
+    , connection
+    , constraints
+    , containers-unicode-symbols
+    , contravariant
+    , convertible
+    , cprng-aes
+    , cpu
+    , crypto-pubkey-types
+    , crypto-random-api
+    , cryptocipher
+    , cryptohash
+    , csv-conduit
+    , derive
+    , diagrams
+    , diagrams-builder
+    , diagrams-cairo
+    , diagrams-contrib
+    , diagrams-core
+    , diagrams-haddock
+    , diagrams-lib
+    , diagrams-postscript
+    , diagrams-svg
+    , dimensional
+    , distributive
+    , doctest
+    , dual-tree
+    , either
+    , eq
+    , esqueleto
+    , fay
+    , fay-base
+    , fay-dom
+    , fay-jquery
+    , fay-text
+    , fay-uri
+    , fb
+    , fb-persistent
+    , fclabels            <2.0
+    , FenwickTree
+    , fixed-list
+    , force-layout
+    , fpco-api
+    , free
+    , github
+    , gitlib
+    , gitlib-cmdline
+    , gitlib-libgit2
+    , gitlib-s3
+    , gitlib-test
+    , graphs
+    , gravatar
+    , groundhog
+    , groundhog-mysql
+    , groundhog-postgresql
+    , groundhog-sqlite
+    , groundhog-th
+    , groupoids
+    , HandsomeSoup
+    , haskell-names
+    , haskell-packages
+    , HaTeX
+    , haxr
+    , hdaemonize
+    , heaps
+    , hebrew-time
+    , hit
+    , hjsmin
+    , hlibgit2
+    , hlint
+    , hoogle
+    , hPDB
+    , hscurses
+    , hse-cpp
+    , hspec
+    , hspec-meta          <1.9
+    , hsyslog
+    , HTF
+    , hweblib
+    , hxt                 <=9.3.0.1
+    , hxt-relaxng
+    , hyphenation
+    , indents
+    , integration
+    , intervals
+    , io-memoize
+    , iterable
+    , judy
+    , kan-extensions
+    , keter
+    , kure                <=2.4.10
+    , language-c
+    , language-ecmascript <0.15.3
+    , language-java
+    , language-javascript
+    , lca
+    , lens
+    , libgit
+    , linear
+    , lockfree-queue      ==0.2
+    , machines
+    , markdown
+    , MFlow
+    , mime-mail-ses
+    , monad-coroutine
+    , monad-extras
+    , monad-parallel
+    , monad-products
+    , monad-st
+    , monadic-arrays
+    , MonadRandom
+    , monoid-extras
+    , mtl
+    , network             <2.5
+    , network-conduit-tls
+    , numbers
+    , numeric-extras
+    , Octree
+    , parseargs
+    , parsers
+    , pem
+    , persistent
+    , persistent-mongoDB  <1.3.1 || >1.3.1
+    , persistent-sqlite
+    , persistent-template
+    , pipes
+    , pipes-concurrency
+    , pipes-parse
+    , pointed
+    , prelude-extras
+    , pretty-class
+    , pretty-show         <=1.6.1
+    , process-conduit
+    , profunctor-extras
+    , profunctors
+    , QuickCheck          <2.7
+    , random-shuffle
+    , recursion-schemes
+    , reducers
+    , reflection
+    , RefSerialize
+    , regex-applicative
+    , rev-state
+    , runmemo
+    , semigroupoid-extras
+    , semigroupoids
+    , semigroups          <0.13
+    , shake
+    , shelly              <=1.0
+    , siphash
+    , smallcheck
+    , smtLib
+    , snaplet-fay
+    , socks
+    , speculation
+    , sqlite-simple
+    , statistics          <0.11
+    , stm-conduit
+    , stm-stats
+    , streams
+    , stylish-haskell
+    , syb-extras
+    , tagged
+    , tardis
+    , tasty
+    , tasty-golden
+    , tasty-hunit
+    , tasty-quickcheck    <0.8.0.3
+    , tasty-smallcheck
+    , TCache
+    , th-expand-syns
+    , these
+    , threepenny-gui
+    , thyme
+    , time-lens
+    , tls
+    , tls-debug
+    , traverse-with-class
+    , udbus
+    , unification-fd
+    , uuid
+    , vector-instances
+    , vector-space-points
+    , vhd
+    , void
+    , wai-websockets
+    , warp-tls
+    , web-fpco
+    , wl-pprint-extras
+    , wl-pprint-terminfo
+    , Workflow
+    , xenstore
+    , xmlgen
+    , yackage
+    , yesod
+    , yesod-auth-fb
+    , yesod-bin
+    , yesod-eventsource
+    , yesod-fay
+    , yesod-fb
+    , yesod-newsfeed
+    , yesod-sitemap
+    , yesod-static
+    , yesod-test
+    -- , yesod-websockets
+
+  -- Depending on programs does not work, they are not registered
+  -- We list them to help distro packaging.
+  build-tools:
+    cabal-install               ==1.16.0.2,
+    alex                        ==3.0.5,
+    happy                       ==1.18.10
+    --                                          end platform packages
+    -- hscolour                 ==1.20.3   -- ???
+    -- haddock                  ==2.13.2 -- need to use the one shipped with ghc
+
+-- N.B.: The begin/end comment annotations are used to build the source
+-- installer: Packages that are part of the core are checked at build time.
+-- Source of packages that are part of the platform are included in the tarball.
