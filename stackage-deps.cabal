@@ -139,6 +139,7 @@ library
     , compressed
     , concurrent-supply
     , conduit-combinators
+    , conduit-extra
     , configurator
     , connection
     , constraints
