@@ -253,7 +253,6 @@ library
     , MonadRandom
     , monoid-extras
     , mtl
-    , network             <2.5
     , network-conduit-tls
     , numbers
     , numeric-extras
